@@ -18,8 +18,8 @@ public class MovimientoJugador3D : MonoBehaviour
     {
         DetectarMovimiento();
         DetectarSalto();
-
-        transform.eulerAngles = Vector3.up * transformPOVCamera.eulerAngles.y;
+        ActualizarRotacion();
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -51,6 +51,11 @@ public class MovimientoJugador3D : MonoBehaviour
             rbJugador.AddForce(Vector3.up * fuerzaSalto, ForceMode.Impulse);
             estaSaltando = true;
         }
+    }
+
+    private void ActualizarRotacion()
+    {
+        transform.eulerAngles = Vector3.up * transformPOVCamera.eulerAngles.y;
     }
 
 }
