@@ -32,6 +32,16 @@
 *.DotSettings.user
 
 # Visual Studio cache directory
+# Unity 
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uilds/
+[Bb]uild/
+[Ll]ogs/
+Packages/manifest.lock
+
+# Archivos de Visual Studio y JetBrains
 .vs/
 
 # Gradle cache directory
@@ -94,6 +104,10 @@ InitTestScene*.unity*
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
+.idea/
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+# Archivos temporales de Mac y Windows
+.DS_Store
+Thumbs.db
