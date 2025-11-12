@@ -5,13 +5,15 @@ public class MovimientoJugador3D : MonoBehaviour
     private Rigidbody rbJugador;
     private bool estaSaltando = false;
     private Transform transformPOVCamera;
+    private Animator animacionJugador;
 
     [SerializeField] private float fuerzaSalto = 3f;
     [SerializeField] private float velocidad = 2f;
     void Start()
     {
         rbJugador = GetComponent<Rigidbody>();
-        transformPOVCamera = GameObject.FindGameObjectWithTag("POVCamera").transform;
+        transformPOVCamera = GameObject.FindGameObjectWithTag("POVCamera").transform; 
+        animacionJugador = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -42,6 +44,7 @@ public class MovimientoJugador3D : MonoBehaviour
         {
             rbJugador.linearVelocity = direccion * velocidad + Vector3.up * rbJugador.linearVelocity.y;
         }
+        animacionJugador.SetFloat("Vertical", movimientoZ);
     }
     private void DetectarSalto()
     {
