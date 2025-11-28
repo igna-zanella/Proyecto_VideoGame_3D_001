@@ -3,16 +3,18 @@ using UnityEngine.AI;
 
 public class NPCController : MonoBehaviour
 {
-    public Transform[] patrolPoints;        // Puntos para caminar en circulo
-    public float detectionRadius = 5f;      // Distancia para detectar al jugador
-    public float fleeDistance = 10f;        // Distancia a la cual huye del jugador
-    public AudioSource screamSound;         // Clip del grito
+    public Transform[] patrolPoints;
+    public float detectionRadius = 5f;
+    public float fleeDistance = 10f;
+    public float minScreamDistance = 3f;    // Distancia mínima para que grite
+    public AudioSource screamSound;
 
     private NavMeshAgent agent;
     private Animator anim;
     private int patrolIndex = 0;
     private Transform player;
     private bool isFleeing = false;
+    private bool screamPlayed = false;      // Evita repetir el grito
 
     void Start()
     {
@@ -35,12 +37,11 @@ public class NPCController : MonoBehaviour
             DetectPlayer();
         }
 
-        // Actualiza animación según velocidad
         anim.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     // -------------------------------
-    //        PATRULLA
+    //            PATRULLA
     // -------------------------------
     void PatrolBehaviour()
     {
@@ -55,13 +56,15 @@ public class NPCController : MonoBehaviour
         if (patrolPoints.Length == 0)
             return;
 
-        agent.speed = 1.5f; // velocidad caminando
+        agent.speed = 1.5f;
         agent.SetDestination(patrolPoints[patrolIndex].position);
         patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
+
+        screamPlayed = false; // Para permitir gritar en el próximo encuentro
     }
 
     // -------------------------------
-    //     DETECCIÓN DEL JUGADOR
+    //        DETECCIÓN DEL JUGADOR
     // -------------------------------
     void DetectPlayer()
     {
@@ -74,15 +77,21 @@ public class NPCController : MonoBehaviour
     }
 
     // -------------------------------
-    //          HUIR
+    //              HUIR
     // -------------------------------
     void StartFlee()
     {
         isFleeing = true;
-        agent.speed = 4.5f; // velocidad corriendo
+        agent.speed = 4.5f;
 
-        if (!screamSound.isPlaying)
+        float playerDistance = Vector3.Distance(transform.position, player.position);
+
+        // Solo gritar si el jugador está muy cerca y aún no gritó
+        if (!screamPlayed && playerDistance <= minScreamDistance)
+        {
+            screamPlayed = true;
             screamSound.Play();
+        }
     }
 
     void UpdateFleeBehaviour()
@@ -92,7 +101,6 @@ public class NPCController : MonoBehaviour
 
         agent.SetDestination(targetPos);
 
-        // Si se alejó lo suficiente, vuelve a patrullar
         if (Vector3.Distance(transform.position, player.position) > fleeDistance)
         {
             isFleeing = false;
@@ -101,11 +109,14 @@ public class NPCController : MonoBehaviour
     }
 
     // -------------------------------
-    //     DIBUJO DEL RADIO
+    //    DIBUJO DEL RADIO DE ALARMA
     // -------------------------------
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, minScreamDistance);
     }
 }
