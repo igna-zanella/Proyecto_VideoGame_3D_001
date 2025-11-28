@@ -87,10 +87,19 @@ public class NPCController : MonoBehaviour
         float playerDistance = Vector3.Distance(transform.position, player.position);
 
         // Solo gritar si el jugador está muy cerca y aún no gritó
-        if (!screamPlayed && playerDistance <= minScreamDistance)
-        {
+        //if (!screamPlayed && playerDistance <= minScreamDistance)
+            Debug.LogWarning(playerDistance);
+        screamSound.Play();
+
+        if (playerDistance <= minScreamDistance)
+            {
             screamPlayed = true;
-            screamSound.Play();
+           
+
+        }
+        else
+        {
+            print("grito");
         }
     }
 

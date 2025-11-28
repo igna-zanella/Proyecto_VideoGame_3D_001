@@ -37,8 +37,8 @@ public class MovimientoJugador3D : MonoBehaviour
         float movimientoX = Input.GetAxis("Horizontal");
         float movimientoZ = Input.GetAxis("Vertical");
         Vector3 direccion = (transform.right * movimientoX + transform.forward * movimientoZ).normalized;
-        Debug.Log(Input.GetAxis("Horizontal"));
-        Debug.Log(Input.GetAxis("Vertical"));
+        //Debug.Log(Input.GetAxis("Horizontal"));
+        //Debug.Log(Input.GetAxis("Vertical"));
 
         if (movimientoX != 0 || movimientoZ != 0)
         {
@@ -48,7 +48,7 @@ public class MovimientoJugador3D : MonoBehaviour
     }
     private void DetectarSalto()
     {
-        Debug.Log(Input.GetKey(KeyCode.Space));
+        //Debug.Log(Input.GetKey(KeyCode.Space));
         if (Input.GetKey(KeyCode.Space) && !estaSaltando)
         {
             rbJugador.AddForce(Vector3.up * fuerzaSalto, ForceMode.Impulse);
