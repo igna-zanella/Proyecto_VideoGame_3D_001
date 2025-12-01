@@ -6,7 +6,7 @@ public class NPCController : MonoBehaviour
     public Transform[] patrolPoints;
     public float detectionRadius = 5f;
     public float fleeDistance = 10f;
-    public float minScreamDistance = 3f;    // Distancia mínima para que grite
+    public float minScreamDistance = 1f;    // Distancia mínima para que grite
     public AudioSource screamSound;
 
     private NavMeshAgent agent;
@@ -85,16 +85,16 @@ public class NPCController : MonoBehaviour
         agent.speed = 4.5f;
 
         float playerDistance = Vector3.Distance(transform.position, player.position);
-
-        // Solo gritar si el jugador está muy cerca y aún no gritó
-        //if (!screamPlayed && playerDistance <= minScreamDistance)
-            Debug.LogWarning(playerDistance);
         screamSound.Play();
 
-        if (playerDistance <= minScreamDistance)
+        // Solo gritar si el jugador está muy cerca y aún no gritó
+        if (!screamPlayed && playerDistance <= minScreamDistance)
+        //    Debug.LogWarning(playerDistance);
+        //    print("Miedo al Zombie");
+
+        //if (playerDistance <= minScreamDistance)
             {
             screamPlayed = true;
-           
 
         }
         else

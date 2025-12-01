@@ -9,6 +9,10 @@ public class MovimientoJugador3D : MonoBehaviour
 
     [SerializeField] private float fuerzaSalto = 3f;
     [SerializeField] private float velocidad = 2f;
+
+    private PickableObject objetoEnMano = null;
+    [SerializeField] private float distanciaInteraccion = 2f;
+
     void Start()
     {
         rbJugador = GetComponent<Rigidbody>();
@@ -21,7 +25,8 @@ public class MovimientoJugador3D : MonoBehaviour
         DetectarMovimiento();
         DetectarSalto();
         ActualizarRotacion();
-        
+        DetectarInteraccion();
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,5 +65,49 @@ public class MovimientoJugador3D : MonoBehaviour
     {
         transform.eulerAngles = Vector3.up * transformPOVCamera.eulerAngles.y;
     }
+
+    private void DetectarInteraccion()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (objetoEnMano == null)
+            {
+                // Intentar tomar un objeto
+                IntentarTomarObjeto();
+            }
+            else
+            {
+                // Soltar objeto
+                SoltarObjeto();
+            }
+        }
+    }
+
+    private void IntentarTomarObjeto()
+    {
+        Ray ray = new Ray(transformPOVCamera.position, transformPOVCamera.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, distanciaInteraccion))
+        {
+            PickableObject pickable = hit.collider.GetComponent<PickableObject>();
+
+            if (pickable != null && !pickable.isPicked)
+            {
+                objetoEnMano = pickable;
+                pickable.Pick();
+            }
+        }
+    }
+
+    private void SoltarObjeto()
+    {
+        Vector3 posicionSueloFrente = transform.position + transform.forward * 1f;
+        posicionSueloFrente.y = transform.position.y;
+
+        objetoEnMano.Drop(posicionSueloFrente);
+        objetoEnMano = null;
+    }
+
 
 }
