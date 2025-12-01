@@ -17,15 +17,22 @@ public class PickableObject : MonoBehaviour
     {
         isPicked = true;
 
+
         // Ocultar objeto
         foreach (Renderer r in renderers)
+        { 
             r.enabled = false;
-
+        }
         // Apagar sonido si tiene
         if (audioSrc != null)
+        {   
             audioSrc.Stop();
-    }
+         }
 
+        GetComponent<Collider>().enabled = false;
+        
+
+    }
     public void Drop(Vector3 dropPosition)
     {
         isPicked = false;
@@ -39,5 +46,6 @@ public class PickableObject : MonoBehaviour
             audioSrc.Play();
 
         transform.position = dropPosition;
+        GetComponent<Collider>().enabled = true;
     }
 }

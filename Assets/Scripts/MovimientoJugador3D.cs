@@ -25,6 +25,11 @@ public class MovimientoJugador3D : MonoBehaviour
         DetectarMovimiento();
         DetectarSalto();
         ActualizarRotacion();
+
+    }
+
+    void Update()
+    {
         DetectarInteraccion();
 
     }
@@ -74,11 +79,13 @@ public class MovimientoJugador3D : MonoBehaviour
             {
                 // Intentar tomar un objeto
                 IntentarTomarObjeto();
+                print("Tecla 'E' presionada");
             }
             else
             {
                 // Soltar objeto
                 SoltarObjeto();
+                print("Soltando");
             }
         }
     }
