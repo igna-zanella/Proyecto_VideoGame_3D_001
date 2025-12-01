@@ -11,7 +11,7 @@ public class MovimientoJugador3D : MonoBehaviour
     [SerializeField] private float velocidad = 2f;
 
     private PickableObject objetoEnMano = null;
-    [SerializeField] private float distanciaInteraccion = 2f;
+    [SerializeField] private float distanciaInteraccion = 3f;
 
     void Start()
     {
@@ -66,7 +66,7 @@ public class MovimientoJugador3D : MonoBehaviour
         transform.eulerAngles = Vector3.up * transformPOVCamera.eulerAngles.y;
     }
 
-    private void DetectarInteraccion()
+    private void DetectarInteraccion() // Métodos agregados para tomar y soltar objetos
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -83,7 +83,7 @@ public class MovimientoJugador3D : MonoBehaviour
         }
     }
 
-    private void IntentarTomarObjeto()
+    private void IntentarTomarObjeto() // Métodos agregados para tomar y soltar objetos
     {
         Ray ray = new Ray(transformPOVCamera.position, transformPOVCamera.forward);
         RaycastHit hit;
@@ -100,7 +100,7 @@ public class MovimientoJugador3D : MonoBehaviour
         }
     }
 
-    private void SoltarObjeto()
+    private void SoltarObjeto() // Métodos agregados para tomar y soltar objetos
     {
         Vector3 posicionSueloFrente = transform.position + transform.forward * 1f;
         posicionSueloFrente.y = transform.position.y;
