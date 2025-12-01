@@ -3950,7 +3950,6 @@ Transform:
   m_Children:
   - {fileID: 1450898590}
   - {fileID: 974260637}
-  - {fileID: 1099802417}
   - {fileID: 601633151}
   - {fileID: 2088168343}
   m_Father: {fileID: 1618155135}
@@ -4324,7 +4323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bfd5b4acdcadf3e4486bd8ea16ccaeca, type: 3}
       propertyPath: m_TagString
-      value: POVCamera
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3221822909267298135, guid: bfd5b4acdcadf3e4486bd8ea16ccaeca, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -4356,6 +4355,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: bfd5b4acdcadf3e4486bd8ea16ccaeca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 811963284}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: bfd5b4acdcadf3e4486bd8ea16ccaeca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1099802417}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bfd5b4acdcadf3e4486bd8ea16ccaeca, type: 3}
       insertIndex: -1
@@ -4543,12 +4545,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099802415}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.04819732, z: -0, w: 0.9988379}
-  m_LocalPosition: {x: -0.082, y: 1.141, z: 0.145}
+  m_LocalRotation: {x: -0, y: 0.72074807, z: -0, w: 0.6931971}
+  m_LocalPosition: {x: 0.049342353, y: 0.17999995, z: 0.012855424}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 926366900}
+  m_Father: {fileID: 987028614}
   m_LocalEulerAnglesHint: {x: 0, y: 5.525, z: 0}
 --- !u!1001 &1104948795
 PrefabInstance:
@@ -6112,7 +6114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e8abed997d9864743bfe45028200e2a7, type: 3}
       propertyPath: m_TagString
-      value: POVCamera
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
