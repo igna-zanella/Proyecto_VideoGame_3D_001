@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+
 
 public class MovimientoJugador3D : MonoBehaviour
 {
@@ -12,6 +14,9 @@ public class MovimientoJugador3D : MonoBehaviour
 
     private PickableObject objetoEnMano = null;
     [SerializeField] private float distanciaInteraccion = 3f;
+
+    [SerializeField] private TextMeshProUGUI interaccionTexto;
+
 
     void Start()
     {
@@ -31,7 +36,36 @@ public class MovimientoJugador3D : MonoBehaviour
     void Update()
     {
         DetectarInteraccion();
+        ActualizarTextoInteraccion();
 
+    }
+
+    private void ActualizarTextoInteraccion()
+    {
+        // Si ya tiene un objeto, ocultar texto
+        if (objetoEnMano != null)
+        {
+            interaccionTexto.gameObject.SetActive(false);
+            return;
+        }
+
+        Ray ray = new Ray(transformPOVCamera.position, transformPOVCamera.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, distanciaInteraccion))
+        {
+            PickableObject pickable = hit.collider.GetComponentInParent<PickableObject>();
+
+            if (pickable != null && !pickable.isPicked)
+            {
+                interaccionTexto.text = "Presiona 'E' para tomar";
+                interaccionTexto.gameObject.SetActive(true);
+                return;
+            }
+        }
+
+        // Si no hay nada delante o está fuera de rango
+        interaccionTexto.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
