@@ -97,7 +97,10 @@ public class MovimientoJugador3D : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distanciaInteraccion))
         {
-            PickableObject pickable = hit.collider.GetComponent<PickableObject>();
+            // Se cambia esta línea de código para ocultar el objeto de forma completa cuando hay padres e hijos
+            //PickableObject pickable = hit.collider.GetComponent<PickableObject>(); 
+            PickableObject pickable = hit.collider.GetComponentInParent<PickableObject>();
+
 
             if (pickable != null && !pickable.isPicked)
             {
